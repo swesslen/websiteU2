@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     height: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 main {
@@ -8,17 +9,58 @@ main {
     justify-content: center;
     gap: 20px;
     background-color: rgb(18, 71, 18);
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 #divAddMain, #divSearchMain, #divListMain {
-    background-color: white;
     border-radius: 10px;
     margin: 10px;
     margin-top: 50px;
     padding: 30px;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+#divAddMain {
+    height: fit-content;
 }
 
 #divAddMain, #divSearchMain {
     display: flex;
     flex-direction: column;
+    background-color: rgb(48, 48, 48);
+}
+
+#divListMain {
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.inputDiv {
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+#citiesSearchDiv  {
+    height: 200px;
+    background-color: whitesmoke;
+    overflow-y: scroll;
+}
+
+button {
+    padding: 20px;
+    background-color: rgb(143, 161, 211);
+    font-size: 20px;
+}
+
+button:hover {
+    background-color:  rgb(121, 137, 180);
+}
+
+input {
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
 }
