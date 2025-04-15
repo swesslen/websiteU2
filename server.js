@@ -20,7 +20,40 @@ const cities = [
 ];
 
 
-function handler (request) {
-
-
+async function handler (request) {
+  const url = new URL(request.url);
+  const headersCORS = new Headers();
+  headersCORS.set("Access-Control-Allow-Origin", "*");
+  if (request.method === "OPTIONS") {
+    return new Response(null, { headers: headersCORS });
+  }
+  if (url.pathname == "/cities") {
+    if (request.method == "GET") {
+      return new Response(cities, { headers: headersCORS, status: 200 })
+    }
+    if (request.method == "POST") {
+      let jsonRqst = await request.json();
+      let rqstInJS = JSON.parse(jsonRqst);
+      if (cities.some(x => x.name == rqstInJS.name)) {
+        return new Response(null, {headers: headersCORS, status: 409 })
+      }
+      if (rqstInJS.name == undefined || rqstInJS.country == undefined) {
+        return new Response(null, {headers: headersCORS, status: 400 })
+      }
+    }
+    if (request.method == "DELETE") {
+      let jsonRqst = await request.json();
+      let rqstInJS = JSON.parse(jsonRqst);
+      if (cities.includes(x => x.id != rqstInJS.id)) {
+        
+      }
+      if (cities.some(x => x.id == rqstInJS.id)) {
+        let indexToDelete = cities.indexOf(x => x.id == rqstInJS.id)
+        cities.splice(indexToDelete, 1)
+        return new Response("Delete OK", { headers: headersCORS, status: 200 })
+      }
+    }
+  }
 }
+
+Deno.serve(handler);

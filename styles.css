@@ -2,13 +2,13 @@ body {
     margin: 0px;
     height: 100%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(18, 71, 18);
 }
 
 main {
     display: flex;
     justify-content: center;
     gap: 20px;
-    background-color: rgb(18, 71, 18);
     padding-left: 15%;
     padding-right: 15%;
 }
