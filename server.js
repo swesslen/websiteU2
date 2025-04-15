@@ -44,13 +44,19 @@ async function handler (request) {
     if (request.method == "DELETE") {
       let jsonRqst = await request.json();
       let rqstInJS = JSON.parse(jsonRqst);
-      if (cities.includes(x => x.id != rqstInJS.id)) {
-        
+      if (rqstInJS.id == undefined) {
+        return new Response(null, { headers: headersCORS, status: 400});
+      }
+      let arr = cities.filter(x => x.id == rqstInJS.id);
+      if (arr.length == 0) {
+        return new Response(null, { headers: headersCORS, status: 404 });
       }
       if (cities.some(x => x.id == rqstInJS.id)) {
         let indexToDelete = cities.indexOf(x => x.id == rqstInJS.id)
-        cities.splice(indexToDelete, 1)
-        return new Response("Delete OK", { headers: headersCORS, status: 200 })
+        if (indexToDelete != -1) {
+          cities.splice(indexToDelete, 1);
+          return new Response("Delete OK", { headers: headersCORS, status: 200 });
+        }
       }
     }
   }
