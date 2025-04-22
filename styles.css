@@ -20,11 +20,10 @@ main {
     padding: 30px;
     gap: 10px;
     flex-grow: 1;
-}
-
-#divAddMain {
     height: fit-content;
 }
+
+
 
 #divAddMain, #divSearchMain {
     display: flex;
@@ -35,6 +34,32 @@ main {
 #divListMain {
     text-align: center;
     background-color: whitesmoke;
+}
+
+#divList {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: start;
+}
+
+.cityDiv {
+    padding: 15px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.deleteButton {
+    background-color: rgb(175, 7, 7);
+    color: white;
+    font-size: 8px;
+    padding: 5px;
+}
+
+.deleteButton:hover {
+    background-color: rgb(145, 7, 7);
 }
 
 .inputDiv {

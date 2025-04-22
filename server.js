@@ -47,8 +47,8 @@ async function handler (request) {
       if (rqstInJS.id == undefined) {
         return new Response(null, { headers: headersCORS, status: 400});
       }
-      let arr = cities.filter(x => x.id == rqstInJS.id);
-      if (arr.length == 0) {
+      let citiesWithOkID = cities.filter(x => x.id == rqstInJS.id);
+      if (citiesWithOkID.length == 0) {
         return new Response(null, { headers: headersCORS, status: 404 });
       }
       if (cities.some(x => x.id == rqstInJS.id)) {
