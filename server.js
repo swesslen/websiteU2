@@ -1,4 +1,3 @@
-
 const cities = [
   { id: 2, name: "Lille", country: "France"},
   { id: 3, name: "Nantes", country: "France"},
@@ -27,9 +26,9 @@ async function handler (request) {
   if (request.method === "OPTIONS") {
     return new Response(null, { headers: headersCORS });
   }
-  if (url.pathname == "/cities") {
+  if (url.pathname == "/cities/") {
     if (request.method == "GET") {
-      return new Response(cities, { headers: headersCORS, status: 200 })
+      return new Response(cities, { headers: headersCORS, status: 200, "Content-Type": "application/json" })
     }
     if (request.method == "POST") {
       let jsonRqst = await request.json();
@@ -39,6 +38,16 @@ async function handler (request) {
       }
       if (rqstInJS.name == undefined || rqstInJS.country == undefined) {
         return new Response(null, {headers: headersCORS, status: 400 })
+      }
+      if (!cities.some(x => x.name == rqstInJS.name && rqstInJS.name != undefined && rqstInJS.country != undefined)) {
+        cities.push({id: cities[cities.length - 1].id + 1, name: `${rqstInJS.name}`, country: `${rqstInJS.country}`})
+        
+        return new Response({
+          "id": `${cities[cities.length - 1].id + 1}`,
+          "name": `${JSON.stringify(rqstInJS.name)}`,
+          "country": `${JSON.stringify(rqstInJS.country)}`},
+          { headers: headersCORS, status: 200, "Content-Type": "application/json" }
+        )
       }
     }
     if (request.method == "DELETE") {
@@ -60,6 +69,7 @@ async function handler (request) {
       }
     }
   }
+  
 }
 
 Deno.serve(handler);

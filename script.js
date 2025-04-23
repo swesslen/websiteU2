@@ -1,7 +1,7 @@
-function createList (array) {
+function createList () {
     let listDiv = document.querySelector("#divList")
     listDiv.innerHTML = "";
-    for (let city of array) {
+    for (let city of cities) {
         let cityDiv = document.createElement("div");
         cityDiv.classList.add("cityDiv");
         listDiv.appendChild(cityDiv);
@@ -21,5 +21,5 @@ function createList (array) {
         })
     }
 }
-createList(cities);
+createList();
 
