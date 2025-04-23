@@ -2,7 +2,8 @@ body {
     margin: 0px;
     height: 100%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: rgb(18, 71, 18);
+    background-position: center;
+    background-image: url(img/blurrycitynight.jpg);
 }
 
 main {
@@ -21,19 +22,19 @@ main {
     gap: 10px;
     flex-grow: 1;
     height: fit-content;
+    border: 3px solid rgb(238, 188, 96);
 }
-
-
 
 #divAddMain, #divSearchMain {
     display: flex;
     flex-direction: column;
-    background-color: rgb(48, 48, 48);
+    background-color: rgb(183, 224, 164);
 }
 
-#divListMain {
+body #divListMain {
     text-align: center;
-    background-color: whitesmoke;
+    background-color: rgb(54, 54, 54);
+    color: white;
 }
 
 #divList {
@@ -41,25 +42,36 @@ main {
     flex-direction: column;
     gap: 5px;
     text-align: start;
+    height: 450px;
+    overflow-y: scroll;
 }
 
 .cityDiv {
     padding: 15px;
-    background-color: black;
+    background-color: rgb(92, 124, 88);
     color: white;
     border-radius: 10px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .deleteButton {
-    background-color: rgb(175, 7, 7);
-    color: white;
+    background-color: rgb(224, 176, 85);
+    color: black;
     font-size: 8px;
     padding: 5px;
+    border: none;
+    border-radius: 5px;
 }
 
 .deleteButton:hover {
-    background-color: rgb(145, 7, 7);
+    background-color: rgb(192, 150, 73);
+}
+
+.deleteButton:active {
+    background-color: rgb(172, 134, 64);
 }
 
 .inputDiv {
@@ -75,12 +87,19 @@ main {
 
 button {
     padding: 20px;
-    background-color: rgb(143, 161, 211);
+    background-color: rgb(134, 179, 127);
     font-size: 20px;
+    border: none;
+    border-radius: 10px;
 }
 
 button:hover {
-    background-color:  rgb(121, 137, 180);
+    background-color:  rgb(119, 150, 115);
+}
+
+button:active {
+    background-color:  rgb(92, 124, 88);
+    color: white;
 }
 
 input {
