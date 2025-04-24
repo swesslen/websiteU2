@@ -1,9 +1,9 @@
 body {
     margin: 0px;
     height: 100%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-position: center;
-    background-image: url(img/blurrycitynight.jpg);
+    background-color: blanchedalmond;
 }
 
 main {
@@ -22,13 +22,13 @@ main {
     gap: 10px;
     flex-grow: 1;
     height: fit-content;
-    border: 3px solid rgb(238, 188, 96);
+    border: 3px solid burlywood;
 }
 
 #divAddMain, #divSearchMain {
     display: flex;
     flex-direction: column;
-    background-color: rgb(183, 224, 164);
+    background-color: rgb(54, 54, 54);
 }
 
 body #divListMain {
@@ -46,19 +46,28 @@ body #divListMain {
     overflow-y: scroll;
 }
 
+#citiesSearchDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
 .cityDiv {
     padding: 15px;
-    background-color: rgb(92, 124, 88);
+    background-color: burlywood;
     color: white;
     border-radius: 10px;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: 3px solid rgb(54, 54, 54);
 }
 
 .deleteButton {
-    background-color: rgb(224, 176, 85);
+    background-color: blanchedalmond;
     color: black;
     font-size: 8px;
     padding: 5px;
@@ -67,11 +76,11 @@ body #divListMain {
 }
 
 .deleteButton:hover {
-    background-color: rgb(192, 150, 73);
+    background-color: rgb(226, 208, 181);
 }
 
 .deleteButton:active {
-    background-color: rgb(172, 134, 64);
+    background-color: rgb(158, 139, 112);
 }
 
 .inputDiv {
@@ -87,18 +96,18 @@ body #divListMain {
 
 button {
     padding: 20px;
-    background-color: rgb(134, 179, 127);
+    background-color: blanchedalmond;
     font-size: 20px;
     border: none;
     border-radius: 10px;
 }
 
 button:hover {
-    background-color:  rgb(119, 150, 115);
+    background-color:  rgb(226, 208, 181);
 }
 
 button:active {
-    background-color:  rgb(92, 124, 88);
+    background-color:  rgb(161, 143, 118);
     color: white;
 }
 
