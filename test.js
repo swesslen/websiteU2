@@ -243,8 +243,40 @@ async function test12() {
         test13();
         return response.json();
     })
+    .catch(error => {
+        console.error("FAULTY TEST 12 ERROR", error)
+    })
 }
 
 async function test13() {
+    fetch("http://localhost:8000/cities/search", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => {
+            console.log("FAULTY TEST 13", response.status)
+            test14();
+            return response.json();
+        })
+        .catch(error => {
+            console.error("FUALTY TEST 13 ERROR", error)
+        })
+}
 
+async function test14() {
+    fetch("http://localhost:8000/mordor", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        console.log("FAULTY TEST 14", response.status);
+        return response.json();
+    })
+    .catch(error => {
+        console.error("FAULTY TEST 14 ERROR", error);
+    })
 }

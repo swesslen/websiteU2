@@ -78,18 +78,18 @@ async function handler(request) {
     }
   }
 
-  if (request.method == "GET" && url.pathname == "/cities/search") {
-    const text = url.searchParams.get("text")?.toLocaleLowerCase() || "";
-    const country = url.searchParams.get("country")?.toLocaleLowerCase() || "";
+  const text = url.searchParams.get("text")?.toLocaleLowerCase() || "";
+  const country = url.searchParams.get("country")?.toLocaleLowerCase() || "";
 
-    if (text === null) {
+  if (request.method == "GET" && url.pathname == "/cities/search") {
+    if (!url.searchParams.get("text")) {
       return new Response(null, { status: 400, headers: headersCORS });
     }
 
     const filteredCities = cities.filter(x => {
-      const matchText = x.name.toLocaleLowerCase().includes(text);
-      const matchCountry = x.country.toLocaleLowerCase().includes(country);
-      return matchText && matchCountry;
+      const matchText = x.name.toLocaleLowerCase().includes(text.toLocaleLowerCase());
+      const matchCountry = x.country.toLocaleLowerCase().includes(country.toLocaleLowerCase());
+      return matchText && matchCountry
     })
 
     return new Response(JSON.stringify(filteredCities), {
@@ -110,21 +110,14 @@ async function handler(request) {
         status: 200,
         headers: headersCORS
       });
+    } else if (!city) {
+      return new Response(JSON.stringify({ error: "Staden hittades inte" }), {
+        status: 404,
+        headers: headersCORS
+      })
     }
-  } else {
-    return new Response(JSON.stringify({ error: "Staden hittades inte" }), {
-      status: 404,
-      headers: headersCORS
-    })
   }
-
-  if (
-    url.pathname != "/cities" ||
-    url.pathname != "/cities/search" && request.method != "GET" ||
-    request.method != "GET" && match
-  ) {
-    return new Response(null, { status: 400, headers: headersCORS });
-  }
+  return new Response(null, { status: 400, headers: headersCORS });
 }
 
 Deno.serve(handler);
