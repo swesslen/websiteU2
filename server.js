@@ -82,8 +82,8 @@ async function handler(request) {
   const country = url.searchParams.get("country")?.toLocaleLowerCase() || "";
 
   if (request.method == "GET" && url.pathname == "/cities/search") {
-    if (!url.searchParams.get("text")) {
-      return new Response(null, { status: 400, headers: headersCORS });
+    if (!text && !country) {
+      return new Response(JSON.stringify("Search parameter text not included"), { status: 400, headers: headersCORS });
     }
 
     const filteredCities = cities.filter(x => {
