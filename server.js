@@ -27,17 +27,20 @@ async function handler(request) {
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json"
   });
+
   if (request.method === "OPTIONS") {
     return new Response(null, { headers: headersCORS });
   }
+
   if (url.pathname == "/cities") {
     if (request.method == "GET") {
       return new Response(JSON.stringify(cities), { headers: headersCORS, status: 200 })
     }
+
     if (request.method == "POST") {
       let body = await request.json();
       if (cities.some(x => x.name == body.name)) {
-        return new Response(null, { headers: headersCORS, status: 409 })
+        return new Response(JSON.stringify("City already in list"), { headers: headersCORS, status: 409 })
       }
       if (body.name == undefined || body.country == undefined) {
         return new Response(null, { headers: headersCORS, status: 400 })
@@ -54,6 +57,7 @@ async function handler(request) {
         }), { headers: headersCORS, status: 200, "Content-Type": "application/json" })
       }
     }
+
     if (request.method == "DELETE") {
       const body = await request.json();
       const id = body.id;
@@ -68,24 +72,58 @@ async function handler(request) {
         let indexToDelete = cities.findIndex(x => x.id == body.id)
         if (indexToDelete != -1) {
           cities.splice(indexToDelete, 1);
-          return new Response("Delete OK", { headers: headersCORS, status: 200 });
+          return new Response(JSON.stringify("Delete OK"), { headers: headersCORS, status: 200 });
         }
       }
     }
   }
+
   if (request.method == "GET" && url.pathname == "/cities/search") {
     const text = url.searchParams.get("text")?.toLocaleLowerCase() || "";
     const country = url.searchParams.get("country")?.toLocaleLowerCase() || "";
+
+    if (text === null) {
+      return new Response(null, { status: 400, headers: headersCORS });
+    }
 
     const filteredCities = cities.filter(x => {
       const matchText = x.name.toLocaleLowerCase().includes(text);
       const matchCountry = x.country.toLocaleLowerCase().includes(country);
       return matchText && matchCountry;
     })
+
     return new Response(JSON.stringify(filteredCities), {
       status: 200,
       headers: headersCORS
     })
+  }
+
+  const getCityByID = new URLPattern({ pathname: "/cities/:id" });
+  const match = getCityByID.exec(request.url);
+
+  if (request.method == "GET" && match) {
+    const id = Number(match.pathname.groups.id);
+    const city = cities.find(x => x.id == id);
+
+    if (city) {
+      return new Response(JSON.stringify(city), {
+        status: 200,
+        headers: headersCORS
+      });
+    }
+  } else {
+    return new Response(JSON.stringify({ error: "Staden hittades inte" }), {
+      status: 404,
+      headers: headersCORS
+    })
+  }
+
+  if (
+    url.pathname != "/cities" ||
+    url.pathname != "/cities/search" && request.method != "GET" ||
+    request.method != "GET" && match
+  ) {
+    return new Response(null, { status: 400, headers: headersCORS });
   }
 }
 

@@ -23,6 +23,7 @@ main {
     flex-grow: 1;
     height: fit-content;
     border: 3px solid burlywood;
+    box-shadow: 15px 15px rgba(0, 0, 0, 0.262);
 }
 
 #divAddMain, #divSearchMain {
@@ -52,6 +53,10 @@ body #divListMain {
     gap: 5px;
     padding: 5px;
     border-radius: 10px;
+    background-color: rgb(54, 54, 54);
+    border: 3px solid burlywood;
+    height: 200px;
+    overflow-y: scroll;
 }
 
 .cityDiv {
@@ -86,12 +91,6 @@ body #divListMain {
 .inputDiv {
     background-color: whitesmoke;
     padding: 10px;
-}
-
-#citiesSearchDiv  {
-    height: 200px;
-    background-color: whitesmoke;
-    overflow-y: scroll;
 }
 
 button {
